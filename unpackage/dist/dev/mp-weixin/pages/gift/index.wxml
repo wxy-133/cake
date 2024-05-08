@@ -1,0 +1,1 @@
+<view class="gift"><view class="content"><image src="/static/img/back.png" alt="" class="back" bindtap="{{a}}"/><image src="/static/img/flushed.png" alt="" class="flushed" bindtap="{{b}}"/><image src="/static/img/hk.jpg" alt="" class="hk" bindtap="{{c}}"/><view class="title"> 「 {{d}} 」 </view><view class="desc">{{e}}</view></view></view>

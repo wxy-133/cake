@@ -1,37 +1,26 @@
 <template>
 	<view class=" content">
 		<view class="cake">
-			<view class="cake_base"></view>
-			<view class="tier1"></view>
-			<view class="white1"></view>
-			<view class="detail1"></view>
-			<view class="detail2"></view>
-			<view class="detail3"></view>
-			<view class="detail3a"></view>
-			<view class="detail3b"></view>
-			<view class="tier1d"></view>
-			<view class="tier2"></view>
-			<view class="tier2d"></view>
-			<view class="white2"></view>
-			<view class="detail4"></view>
-			<view class="detail5"></view>
-			<view class="detail6"></view>
-			<view class="tier3"></view>
-			<view class="tier3d"></view>
-			<view class="white3"></view>
-			<view class="detail7"></view>
-			<view class="detail8"></view>
-			<view class="detail9"></view>
-			<view class="flame"></view>
-			<view class="holder"></view>
+			<view class="cake-img">
+				<image src="../../static/img/cake.png" mode=""></image>
+			</view>
+			<view class="play-text">
+				<view class="play-tips">点击右侧{{text}}</view>
+				<view class="play-bg" @click="musicClick">
+					<image v-if="isPlay" src="../../static/img/play.png" mode=""></image>
+					<image v-else src="../../static/img/pause.png" mode=""></image>
+				</view>
+			</view>
+			<view class="zf">
+				生日快乐
+			</view>
 		</view>
-		<view class="music" @click="musicClick">
-			<image src="/static/img/music.png" mode="" v-if="isPlay!==true"></image>
-			<image src="/static/img/music_active.png" mode="" v-else></image>
+		<!-- 	<view class="music-btn" @click="musicClick">
+			{{text}}
+		</view> -->
+		<view class="shareBtn" @click="giftClick">
+			查看寄语
 		</view>
-		<!-- 
-		<audio style="text-align: left" :src="current.src" :poster="current.poster" :name="current.name"
-			:author="current.author" :action="audioAction" controls></audio> -->
 	</view>
 </template>
 
@@ -40,10 +29,20 @@
 		data() {
 			return {
 				isPlay: false,
+				text: "播放音乐"
 			}
 		},
-		onLoad() {
+		onShareAppMessage(res) {
+			let that = this;
+			let imageUrl = that.shareUrl || '';
+			if (res.from === 'button') {
 
+				return {
+					title: '生日快乐，吃个蛋糕吧',
+					path: 'index/index',
+					imageUrl: imageUrl
+				};
+			}
 		},
 		methods: {
 
@@ -59,8 +58,10 @@
 				}
 				this.isPlay = !this.isPlay;
 				if (!this.isPlay) {
+					this.text = '播放音乐'
 					this.innerAudioContext.pause(); // 暂停音频
 				} else {
+					this.text = '暂停音乐'
 					// this.innerAudioContext.play(); // 播放音频
 					setTimeout(() => {
 						this.innerAudioContext.play();
@@ -68,10 +69,12 @@
 					}, 10);
 				}
 
+			},
+			giftClick() {
+				uni.navigateTo({
+					url: '/pages/gift/index'
+				})
 			}
-
-
-
 		}
 	}
 </script>
@@ -79,344 +82,90 @@
 <style lang="less" scoped>
 	page {
 
-		display: flex;
+		// display: flex;
 		height: 100vh;
-		align-items: center;
-		justify-content: center;
-		background-color: #b0d5df;
-		overflow: hidden;
+		// align-items: center;
+		// justify-content: center;
+		// background-color: #b0d5df;
+		// overflow: hidden;
 		margin: 0;
+
 	}
-
-
-	.cake {
-
-		body {
-			background: white;
-			font-family: "Pacifico", cursive;
-		}
-
-		.cake_base {
-			top: 60.5%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 80%;
-			height: 1.5%;
-			background-color: lightgray;
-			border-radius: 12rpx;
-		}
-
-		h2 {
-			color: hotpink;
-			font-size: 1.5em;
-			text-align: center;
-			top: 65%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-		}
-
-		.tier1 {
-			top: 57%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 10px;
-			width: 60%;
-			height: 6%;
-			background-color: #e7b1db;
-			z-index: 1;
-		}
-
-		.white1 {
-			top: 54.5%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 60%;
-			height: 1%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail1 {
-			top: 54.5%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail2 {
-			top: 54.5%;
-			left: 55%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail3 {
-			top: 54.5%;
-			left: 45%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail3a {
-			top: 54.5%;
-			left: 40%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail3b {
-			top: 54.5%;
-			left: 60%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.tier1d {
-			top: 57%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 60%;
-			height: 1.5%;
-			background-color: #db57bd;
-			z-index: 1;
-		}
-
-		.tier2 {
-			top: 51%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 10px;
-			width: 57%;
-			height: 6%;
-			background-color: #a5dae4;
-			z-index: 1;
-		}
-
-		.tier2d {
-			top: 51%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 57%;
-			height: 1.5%;
-			background-color: #59bdd0;
-			z-index: 1;
-		}
-
-		.white2 {
-			top: 48.5%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 57%;
-			height: 1.5%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail4 {
-			top: 48.5%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail5 {
-			top: 48.5%;
-			left: 45%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail6 {
-			top: 48.5%;
-			left: 55%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.tier3 {
-			top: 45%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 10px;
-			width: 50%;
-			height: 6%;
-			background-color: #cba3e6;
-			z-index: 1;
-		}
-
-		.tier3d {
-			top: 45%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 50%;
-			height: 1.5%;
-			background-color: #9b36df;
-			z-index: 1;
-		}
-
-		.white3 {
-			top: 42%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 57%;
-			height: 1.5%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail7 {
-			top: 42.3%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail8 {
-			top: 42.3%;
-			left: 45%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.detail9 {
-			top: 42.3%;
-			left: 55%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			border-radius: 50%;
-			width: 4%;
-			height: 2%;
-			background-color: white;
-			z-index: 1;
-		}
-
-		.holder {
-			top: 38%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			width: 1.5%;
-			border-radius: 30px;
-			height: 7%;
-			background-color: beige;
-			z-index: 1;
-		}
-
-		.flame {
-			position: absolute;
-			background-color: orange;
-			width: 1.5%;
-			height: 4.5%;
-			border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
-			top: 30%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			box-shadow: 0 0 10px 1px orange;
-			animation: shadow 1s ease-in-out alternate infinite, move 3s linear infinite;
-		}
-
-		@keyframes shadow {
-			0% {
-				box-shadow: 0 0 10px 1px orange;
-			}
-
-			25% {
-				box-shadow: 0 0 15px 1px orange;
-			}
-
-			50% {
-				box-shadow: 0 0 20px 1px orange;
-			}
-
-			75% {
-				box-shadow: 0 0 15px 1px orange;
-			}
-
-			100% {
-				box-shadow: 0 0 10px 1px orange;
-			}
-		}
-
-		@keyframes move {
-
-			0%,
-			100% {
-				transform: translateX(-50%) rotate(-5deg)
-			}
-
-			50% {
-				transform: translateX(-50%) rotate(5deg)
-			}
-		}
-	}
-
-
 
 	.content {
-		width: 100%;
 		height: 100%;
 		position: relative;
+		background: black;
+		background-image: url('../../static/img/bg.png');
+		background-position: 0 0;
+		background-repeat: 0 0;
+		background-size: 100%;
+		padding: 32rpx;
+
+
+		.cake {
+			width: 90.6%;
+			height: 1110rpx;
+			background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.73) 100%);
+			padding: 32rpx;
+			border-radius: 32rpx;
+
+			.cake-img {
+				height: 880rpx;
+
+				image {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			.play-text {
+
+				display: flex;
+				margin-top: 20rpx;
+				justify-content: space-between;
+				position: relative;
+
+				.play-tips {
+					width: 320rpx;
+					height: 60rpx;
+					font-family: PingFangSC, PingFang SC;
+					font-weight: 400;
+					font-size: 30rpx;
+					line-height: 60rpx;
+					color: #FFFFFF;
+					border-radius: 32rpx;
+					padding-left: 20rpx;
+					background: #000000;
+				}
+
+				.play-bg {
+					width: 158rpx;
+					height: 158rpx;
+					background-image: url('../../static/img/play-bg.png');
+					background-position: 0 0;
+					background-repeat: 0 0;
+					background-size: 100%;
+					position: absolute;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					top: -75rpx;
+					right: -2px;
+
+					image {
+						width: 40rpx;
+						height: 40rpx;
+					}
+				}
+			}
+
+			.zf {
+				font-size: 140rpx;
+				text-align: center;
+				color: #F7B6B0;
+			}
+		}
 
 		.music {
 			position: absolute;
@@ -426,6 +175,25 @@
 				width: 100rpx;
 				height: 100rpx;
 			}
+		}
+
+		.shareBtn {
+			width: 40%;
+			height: 5%;
+			color: white;
+			background: #c1d8b7;
+
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+			margin-top: 50rpx;
+			font-size: 28rpx;
+			border-radius: 32rpx;
+			background: linear-gradient(134deg, #4EF5C3 0%, #794DFF 42%, #56DAF5 100%);
+			box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.38);
+			border: 1px solid #FFFFFF;
 		}
 	}
 </style>

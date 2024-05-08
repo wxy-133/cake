@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "吃个蛋糕吧"
 			}
+		},
+		{
+			"path": "pages/gift/index",
+			"style": {
+				"navigationBarTitleText": "寄语"
+			}
 		}
 	],
 	"globalStyle": {
