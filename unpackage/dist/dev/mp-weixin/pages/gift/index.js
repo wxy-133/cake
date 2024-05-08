@@ -6,11 +6,13 @@ const _sfc_main = {
       hitokoto: "",
       creator: "",
       from: "",
+      imgUrl: "",
       index: 0
     };
   },
   onLoad() {
     this.getGift();
+    this.goImg();
   },
   methods: {
     backClick() {
@@ -26,6 +28,15 @@ const _sfc_main = {
         }
       });
     },
+    goImg() {
+      common_vendor.index.request({
+        url: `https://cn.bing.com/HPImageArchive.aspx?format=js&idx=${this.index}&n=1`,
+        success: (res) => {
+          const url = res.data.images[0].url;
+          this.imgUrl = `https://www.bing.com//${url}`;
+        }
+      });
+    },
     flushedClick() {
       this.index++;
       if (this.index >= 10) {
@@ -35,6 +46,7 @@ const _sfc_main = {
         return;
       }
       this.getGift();
+      this.goImg();
     }
   }
 };
@@ -42,9 +54,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.o((...args) => $options.backClick && $options.backClick(...args)),
     b: common_vendor.o((...args) => $options.flushedClick && $options.flushedClick(...args)),
-    c: common_vendor.o((...args) => $options.flushedClick && $options.flushedClick(...args)),
-    d: common_vendor.t($data.hitokoto),
-    e: common_vendor.t($data.from)
+    c: $data.imgUrl,
+    d: common_vendor.o((...args) => $options.flushedClick && $options.flushedClick(...args)),
+    e: common_vendor.t($data.hitokoto),
+    f: common_vendor.t($data.from)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/吴/Documents/HBuilderProjects/cake/pages/gift/index.vue"]]);

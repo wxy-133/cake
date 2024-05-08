@@ -4,7 +4,7 @@
 			<img src="/static/img/back.png" alt="" class="back" @click="backClick" />
 			<img src="/static/img/flushed.png" alt="" class="flushed" @click="flushedClick" />
 
-			<img src="/static/img/hk.jpg" alt="" class="hk" @click="flushedClick" />
+			<img :src="imgUrl" alt="" class="hk" @click="flushedClick" />
 
 			<view class="title">
 				「 {{hitokoto}} 」
@@ -23,11 +23,13 @@
 				hitokoto: "",
 				creator: "",
 				from: "",
+				imgUrl: '',
 				index: 0
 			}
 		},
 		onLoad() {
 			this.getGift()
+			this.goImg()
 		},
 		methods: {
 			backClick() {
@@ -43,6 +45,16 @@
 					}
 				})
 			},
+			goImg() {
+				uni.request({
+					url: `https://cn.bing.com/HPImageArchive.aspx?format=js&idx=${this.index}&n=1`,
+					success: (res) => {
+						const url = res.data.images[0].url
+
+						this.imgUrl = `https://www.bing.com//${url}`
+					}
+				})
+			},
 			flushedClick() {
 				this.index++
 
@@ -53,6 +65,7 @@
 					return
 				}
 				this.getGift()
+				this.goImg()
 			}
 		}
 	}
@@ -60,20 +73,23 @@
 
 <style lang="less">
 	.gift {
+		height: 100%;
 		position: relative;
-		width: 100%;
-		height: 100vh;
+		background: black;
+		background-image: url('../../static/img/bg.png');
+		background-position: 0 0;
+		background-repeat: 0 0;
+		background-size: 100%;
+		padding: 32rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		.content {
 			width: 90%;
-			height: 60%;
+			height: 70%;
 			margin: 0 auto;
-			margin-top: 50rpx;
 			position: relative;
-			// display: flex;
-			// flex-direction: column;
-			// justify-content: center;
-			// align-items: center;
 
 			.flushed {
 				position: absolute;
@@ -98,6 +114,8 @@
 				top: 0px;
 				left: 50%;
 				transform: translateX(-50%);
+				border-radius: 32rpx;
+				height: 580rpx;
 			}
 
 			.title {
@@ -106,24 +124,25 @@
 				color: white;
 				width: 85%;
 				line-height: 46rpx;
-				color: #354e5a;
-				/* margin-top: 51px; */
+				color: #d6d2fb;
 				position: absolute;
-				top: 500rpx;
+				top: 600rpx;
 				left: 50%;
 				transform: translateX(-50%);
 			}
 
+
 			.desc {
-				font-size: 26rpx;
-				color: #354e5a;
+				font-size: 25rpx;
+				color: #d6d2fb;
 				margin-top: 20rpx;
 				position: absolute;
-				top: 587rpx;
-				left: 50%;
-				transform: translateX(-50%);
+				top: 679rpx;
+				left: 80%;
+				opacity: .8;
 				display: none;
 			}
+
 		}
 	}
 </style>
