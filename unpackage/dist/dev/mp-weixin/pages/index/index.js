@@ -45,6 +45,11 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: "/pages/gift/index"
       });
+    },
+    cardClick() {
+      common_vendor.index.navigateTo({
+        url: "/pages/card/index"
+      });
     }
   }
 };
@@ -54,7 +59,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: $data.isPlay
   }, $data.isPlay ? {} : {}, {
     c: common_vendor.o((...args) => $options.musicClick && $options.musicClick(...args)),
-    d: common_vendor.o((...args) => $options.giftClick && $options.giftClick(...args))
+    d: common_vendor.o((...args) => $options.cardClick && $options.cardClick(...args)),
+    e: common_vendor.o((...args) => $options.giftClick && $options.giftClick(...args))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1cf27b2a"], ["__file", "C:/Users/吴/Documents/HBuilderProjects/cake/pages/index/index.vue"]]);

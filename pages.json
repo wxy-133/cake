@@ -11,6 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "寄语"
 			}
+		},
+		{
+			"path": "pages/card/index",
+			"style": {
+				"navigationBarTitleText": "贺卡"
+			}
 		}
 	],
 	"globalStyle": {

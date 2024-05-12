@@ -18,8 +18,13 @@
 		<!-- 	<view class="music-btn" @click="musicClick">
 			{{text}}
 		</view> -->
-		<view class="shareBtn" @click="giftClick">
-			查看寄语
+		<view class="btns">
+			<view class="shareBtn" @click="cardClick">
+				查看贺卡
+			</view>
+			<view class="shareBtn" @click="giftClick">
+				查看日摘
+			</view>
 		</view>
 	</view>
 </template>
@@ -73,6 +78,11 @@
 			giftClick() {
 				uni.navigateTo({
 					url: '/pages/gift/index'
+				})
+			},
+			cardClick(){
+				uni.navigateTo({
+					url: '/pages/card/index'
 				})
 			}
 		}
@@ -177,23 +187,34 @@
 			}
 		}
 
-		.shareBtn {
-			width: 40%;
-			height: 5%;
-			color: white;
-			background: #c1d8b7;
-
-			text-align: center;
+		.btns {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			margin: 0 auto;
-			margin-top: 50rpx;
-			font-size: 28rpx;
-			border-radius: 32rpx;
-			background: linear-gradient(134deg, #4EF5C3 0%, #794DFF 42%, #56DAF5 100%);
-			box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.38);
-			border: 1px solid #FFFFFF;
+
+			.shareBtn {
+				width: 40%;
+				height: 60rpx;
+				color: white;
+				background: #c1d8b7;
+
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin: 0 auto;
+				margin-top: 50rpx;
+				font-size: 28rpx;
+				border-radius: 32rpx;
+				background: linear-gradient(134deg, #4EF5C3 0%, #794DFF 42%, #56DAF5 100%);
+				box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.38);
+				border: 1px solid #ffffff80;
+				margin-left: 20rpx;
+				&:nth-child(2){
+					border: 1px solid #56DAF5;
+					background: linear-gradient(134deg, #56DAF5 0%, #794DFF 42%, #4EF5C3 100%);
+				}
+			}
 		}
 	}
 </style>
